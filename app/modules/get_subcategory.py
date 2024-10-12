@@ -1,4 +1,5 @@
-from product import Product
+from app.modules.product import Product
+
 
 def get_subcategory(products: list[Product]) -> dict[str, list[Product]]:
 

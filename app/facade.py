@@ -1,5 +1,5 @@
 from app.modules.product import Product
-from subcategories import get_subcategory
+from app.modules.get_subcategory import get_subcategory
 from db.access_reader import AccessReader
 
 
@@ -25,7 +25,6 @@ def get_subcategories(products: list[Product]) -> dict:
     :return: список подкатегорий с товарами, объединенными по ОКПД2
     """
     subcategory = get_subcategory(products)
-
     return subcategory
 
 
