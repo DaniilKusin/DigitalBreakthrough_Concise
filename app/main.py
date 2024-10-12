@@ -3,10 +3,11 @@ from test.print_products import print_products
 
 
 def main():
+    # Чтение данных из БД и формирование списка товаров из объектов Product
     products = read_db('./data/accdb/spravochnik_tovarov.accdb')
-    subcategory_products = get_subcategories(products)
 
-    print_products(subcategory_products)
+    # Разделение товаров на подкатегории согласно ОКПД2
+    subcategory_products = get_subcategories(products)
 
     # Получение групп для каждой подкатегории в виде {"подкатегория 1": ["группа 1", "группа 2", ]}
     subcategory_groups = {}

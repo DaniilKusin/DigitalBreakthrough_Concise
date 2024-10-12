@@ -34,7 +34,7 @@ def get_groups(subcategory_products: list[Product]) -> list[str]:
     :param subcategory_products: список товаров одной подкатегории
     :return: список групп для данной подкатегории
     """
-    return []
+    return ["группа 1", "группа 2", "группа 3"]
 
 
 def choose_group(product: Product, groups: list[str]) -> str:
@@ -44,7 +44,7 @@ def choose_group(product: Product, groups: list[str]) -> str:
     :param groups: группы для подкатегории, к которой относится товар
     :return: группа, к которой товар должен быть отнесен
     """
-    return ''
+    return "группа 1"
 
 
 def get_group_properties(group_products: list[Product]) -> list[str]:
@@ -53,7 +53,7 @@ def get_group_properties(group_products: list[Product]) -> list[str]:
     :param group_products: группа с товарами в ней
     :return: свойства для данной группы
     """
-    return []
+    return ["свойство 1", "свойство 2", "свойство 3"]
 
 
 def get_product_with_properties(product: Product, properties: list[str]) -> Product:
@@ -63,6 +63,9 @@ def get_product_with_properties(product: Product, properties: list[str]) -> Prod
     :param properties: свойства группы товара, в которые необходимо разложить параметры товара
     :return:
     """
+    product.properties["свойство 1"] = "параметр 1"
+    product.properties["свойство 2"] = "параметр 2"
+    product.properties["свойство 3"] = "параметр 3"
     return product
 
 
