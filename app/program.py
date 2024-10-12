@@ -5,7 +5,7 @@ from app.ai.ai_request import AIRequest  # Предполагается, что 
 
 def main():
     # Инициализация AIAnalysis
-    ai = AIRequest("ai/")  # Если модель находится не в текущей директории, укажите путь: AIAnalysis("path/to/model")
+    ai = AIRequest("./models/")  # Если модель находится не в текущей директории, укажите путь: AIAnalysis("path/to/model")
     
     # Чтение запроса из файла
     with open("ai/promts/request_groups.txt", "r", encoding="utf-8") as file:

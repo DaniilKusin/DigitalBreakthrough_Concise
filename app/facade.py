@@ -5,7 +5,7 @@ from db.access_reader import AccessReader
 
 def read_db(db_filepath: str) -> list[Product]:
     """
-
+    Считывает данные из БД
     :param db_filepath: путь до БД
     :return: список объектов Product (перенос записей таблиц в объекты)
     """
@@ -20,7 +20,7 @@ def read_db(db_filepath: str) -> list[Product]:
 
 def get_subcategories(products: list[Product]) -> dict:
     """
-
+    Разделяет товары по подкатегориям ОКПД2
     :param products: список объектов Product
     :return: список подкатегорий с товарами, объединенными по ОКПД2
     """
@@ -30,7 +30,7 @@ def get_subcategories(products: list[Product]) -> dict:
 
 def get_groups(subcategory_products: list[Product]) -> list[str]:
     """
-
+    Выделяет группы для товаров одной подкатегории
     :param subcategory_products: список товаров одной подкатегории
     :return: список групп для данной подкатегории
     """
@@ -39,7 +39,7 @@ def get_groups(subcategory_products: list[Product]) -> list[str]:
 
 def choose_group(product: Product, groups: list[str]) -> str:
     """
-
+    Для товара выбирает группу, к которой его следует отнести
     :param product: товар
     :param groups: группы для подкатегории, к которой относится товар
     :return: группа, к которой товар должен быть отнесен
@@ -49,7 +49,7 @@ def choose_group(product: Product, groups: list[str]) -> str:
 
 def get_group_properties(group_products: list[Product]) -> list[str]:
     """
-
+    Для группы с товарами выделяет свойства группы
     :param group_products: группа с товарами в ней
     :return: свойства для данной группы
     """
@@ -58,7 +58,7 @@ def get_group_properties(group_products: list[Product]) -> list[str]:
 
 def get_product_with_properties(product: Product, properties: list[str]) -> Product:
     """
-
+    Заполняет словарь properties у товара в соответствии с переданными свойствами, выделяя свойства товара из строки параметров
     :param product: товар
     :param properties: свойства группы товара, в которые необходимо разложить параметры товара
     :return:
@@ -68,7 +68,7 @@ def get_product_with_properties(product: Product, properties: list[str]) -> Prod
 
 def save_table(products: list[Product], group_name: str, properties: list[str]):
     """
-
+    Создает таблицу группы в БД, сохраняет товары в ней
     :param products: список товаров
     :param group_name: название группы, к которой относятся товары
     :param properties: список свойств группы
