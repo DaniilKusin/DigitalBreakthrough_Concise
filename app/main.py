@@ -1,5 +1,5 @@
 from facade import *
-from app.test.print_products import print_products
+from test.print_products import print_products
 
 
 def main():

@@ -1,7 +1,7 @@
 def print_products(subcategory_products: dict):
     i = 0
     for key, values in subcategory_products.items():
-        if i == 3:
+        if i == 4:
             for i in range(len(values)):
                 p = values[i]
                 print(p.okpd2, p.name)
