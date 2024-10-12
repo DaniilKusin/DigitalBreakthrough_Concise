@@ -8,10 +8,13 @@ def main():
 
     print_products(subcategory_products)
 
+    # Получение групп для каждой подкатегории в виде {"подкатегория 1": ["группа 1", "группа 2", ]}
     subcategory_groups = {}
     for subcategory_name, prods in subcategory_products.items():
         subcategory_groups[subcategory_name] = get_groups(prods)
 
+    # Получение товаров для каждой группы в подкатегории
+    # в виде {"подкатегория 1": {"группа 1": [Product 1, Product 2, ], }}
     subcategory_groups_products = {}
     for subcategory_name, prods in subcategory_products.items():
         subcategory_groups_products[subcategory_name] = {}
@@ -22,18 +25,22 @@ def main():
             prod_group = choose_group(p, subcategory_groups[subcategory_name])
             subcategory_groups_products[subcategory_name][prod_group].append(p)
 
+    # Получение свойств для каждой группы в подкатегории
+    # в виде {"подкатегория 1": {"группа 1": ["свойство 1", "свойство 2", ], }}
     subcategory_group_properties = {}
     for subcategory_name, groups in subcategory_groups_products.items():
         for group_name, group_products in groups.items():
             subcategory_group_properties[subcategory_name] = {}
             subcategory_group_properties[subcategory_name][group_name] = get_group_properties(group_products)
 
+    # Перераспределение свойств товара в соответствии со свойствами его группы
     for subcategory_name, subc_groups in subcategory_groups_products.items():
         for group_name, products in subc_groups.items():
             for prod in products:
                 subc_groups[prod] = get_product_with_properties(prod, subcategory_group_properties[subcategory_name][
                     group_name])
 
+    # Сохранение полученных групп с товарами в БД
     for subcategory_name, subc_groups in subcategory_groups_products.items():
         for group_name, products in subc_groups.items():
             save_table(products, group_name, subcategory_group_properties[subcategory_name][group_name])
