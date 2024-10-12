@@ -9,13 +9,13 @@ def main():
     # Разделение товаров на подкатегории согласно ОКПД2
     subcategory_products = get_subcategories(products)
 
-    # Получение групп для каждой подкатегории в виде {"подкатегория 1": ["группа 1", "группа 2", ]}
+    # Получение групп для каждой подкатегории в виде {"ОКПД2": ["группа 1", "группа 2", ]}
     subcategory_groups = {}
     for subcategory_name, prods in subcategory_products.items():
         subcategory_groups[subcategory_name] = get_groups(prods)
 
     # Получение товаров для каждой группы в подкатегории
-    # в виде {"подкатегория 1": {"группа 1": [Product 1, Product 2, ], }}
+    # в виде {"ОКПД2": {"группа 1": [Product 1, Product 2, ], }}
     subcategory_groups_products = {}
     for subcategory_name, prods in subcategory_products.items():
         subcategory_groups_products[subcategory_name] = {}
@@ -27,19 +27,20 @@ def main():
             subcategory_groups_products[subcategory_name][prod_group].append(p)
 
     # Получение свойств для каждой группы в подкатегории
-    # в виде {"подкатегория 1": {"группа 1": ["свойство 1", "свойство 2", ], }}
+    # в виде {"ОКПД2": {"группа 1": ["свойство 1", "свойство 2", ], }}
     subcategory_group_properties = {}
     for subcategory_name, groups in subcategory_groups_products.items():
+        subcategory_group_properties[subcategory_name] = {}
         for group_name, group_products in groups.items():
-            subcategory_group_properties[subcategory_name] = {}
             subcategory_group_properties[subcategory_name][group_name] = get_group_properties(group_products)
 
     # Перераспределение свойств товара в соответствии со свойствами его группы
     for subcategory_name, subc_groups in subcategory_groups_products.items():
         for group_name, products in subc_groups.items():
-            for prod in products:
-                subc_groups[prod] = get_product_with_properties(prod, subcategory_group_properties[subcategory_name][
-                    group_name])
+            for i in range(len(products)):
+                subcategory_groups_products[subcategory_name][group_name][i] = \
+                    get_product_with_properties(subcategory_groups_products[subcategory_name][group_name][i],
+                                                subcategory_group_properties[subcategory_name][group_name])
 
     # Сохранение полученных групп с товарами в БД
     for subcategory_name, subc_groups in subcategory_groups_products.items():
