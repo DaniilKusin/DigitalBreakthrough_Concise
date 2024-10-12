@@ -1,9 +1,12 @@
 from facade import *
+from app.test.print_products import print_products
 
 
 def main():
     products = read_db('./data/accdb/spravochnik_tovarov.accdb')
     subcategory_products = get_subcategories(products)
+
+    print_products(subcategory_products)
 
     subcategory_groups = {}
     for subcategory_name, prods in subcategory_products.items():
