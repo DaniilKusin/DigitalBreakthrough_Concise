@@ -5,7 +5,12 @@ class AccessReader:
     def __init__(self):
         pass
 
-    def read_all(self, db_filepath: str):
+    def read_all(self, db_filepath: str) -> list:
+        """
+        Читает все данные из БД в виде списка записей
+        :param db_filepath: путь до БД
+        :return: список записей
+        """
         records = []
         connection = self._connect(db_filepath)
         if connection is not None:

@@ -5,7 +5,7 @@ from db.access_reader import AccessReader
 
 def read_db(db_filepath: str) -> list[Product]:
     """
-    Считывает данные из БД
+    Считывает данные из БД Access
     :param db_filepath: путь до БД
     :return: список объектов Product (перенос записей таблиц в объекты)
     """
